@@ -1,8 +1,5 @@
 # Multi-Language-Database
 A comprehensive project demonstrating the integration of Go, C++, and Python for creating and managing a database application. Each language is utilized for its strengths: Go for backend server logic, C++ for high-performance components, and Python for automation, data processing, and analytics.
-# Multi-Language Database Project
-
-This project is designed to demonstrate the integration of three programming languages (Go, C++, and Python) for creating and managing a database application. Each language is used for different aspects of the project to leverage their strengths.
 
 ## Table of Contents
 

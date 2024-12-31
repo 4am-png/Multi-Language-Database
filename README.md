@@ -1,4 +1,5 @@
 # Multi-Language-Database
+
 A comprehensive project demonstrating the integration of Go, C++, and Python for creating and managing a database application. Each language is utilized for its strengths: Go for backend server logic, C++ for high-performance components, and Python for automation, data processing, and analytics.
 
 ## Table of Contents
@@ -6,7 +7,13 @@ A comprehensive project demonstrating the integration of Go, C++, and Python for
 - [Project Structure](#project-structure)
 - [Database Schema](#database-schema)
 - [Setup](#setup)
+  - [Go Server Setup](#go-server-setup)
+  - [C++ Components Setup](#c++-components-setup)
+  - [Python Scripts Setup](#python-scripts-setup)
 - [Usage](#usage)
+  - [Running the Go Server](#running-the-go-server)
+  - [Executing C++ Components](#executing-c++-components)
+  - [Using Python Scripts](#using-python-scripts)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -15,6 +22,13 @@ A comprehensive project demonstrating the integration of Go, C++, and Python for
 - **Go**: Handles backend server logic, API endpoints, and database interactions.
 - **C++**: Manages high-performance components.
 - **Python**: Provides scripts for automation, data processing, and analytics.
+
+### Directories
+
+- `go-server/`: Contains Go server source code.
+- `cpp-components/`: Contains C++ components.
+- `python-scripts/`: Contains Python scripts.
+- `schema.sql`: SQL file with the database schema.
 
 ## Database Schema
 

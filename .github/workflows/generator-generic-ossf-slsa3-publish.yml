@@ -1,0 +1,60 @@
+name: SLSA Generator for Multi-Language-Database
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      digests: ${{ steps.hash.outputs.digests }}
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 1: Build your artifacts
+      - name: Build Artifacts
+        run: |
+          # Generate Go server binary
+          cd go-server
+          go build -o go-server-binary main.go
+          cd ..
+
+          # Compile C++ components
+          cd cpp-components
+          make
+          cd ..
+
+          # Create Python script package
+          tar -czf python-scripts.tar.gz python-scripts/
+
+          # Ensure all artifacts are in the root directory
+          mv go-server/go-server-binary .
+          mv cpp-components/*.out .
+          mv python-scripts.tar.gz .
+
+      # Step 2: Generate subject for provenance
+      - name: Generate Subject for Provenance
+        id: hash
+        run: |
+          set -euo pipefail
+
+          # List the artifacts the provenance will refer to.
+          files=$(ls go-server-binary *.out python-scripts.tar.gz)
+          # Generate the subjects (base64 encoded).
+          echo "hashes=$(sha256sum $files | base64 -w0)" >> "${GITHUB_OUTPUT}"
+
+  provenance:
+    needs: [build]
+    permissions:
+      actions: read   # To read the workflow path.
+      id-token: write # To sign the provenance.
+      contents: write # To add assets to a release.
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.4.0
+    with:
+      base64-subjects: "${{ needs.build.outputs.digests }}"
+      upload-assets: true

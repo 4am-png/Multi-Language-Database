@@ -1,0 +1,50 @@
+name: Go CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Go
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.20
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: go mod tidy
+
+      # Build the application
+      - name: Build
+        run: go build -v ./...
+
+      # Run tests
+      - name: Run Tests
+        run: go test -v ./...
+
+      # Lint the code
+      - name: Run GoLint
+        run: |
+          go install golang.org/x/lint/golint@latest
+          golint ./...
+
+      # Optional: Upload build artifacts
+      - name: Upload Build Artifacts
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: go-build
+          path: ./<your-built-binary>

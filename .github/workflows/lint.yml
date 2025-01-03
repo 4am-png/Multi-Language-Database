@@ -1,0 +1,42 @@
+name: Linting
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install linters
+        run: |
+          pip install flake8
+          pip install pylint
+
+      - name: Lint Python
+        run: |
+          flake8 python-scripts/
+          pylint python-scripts/
+
+      - name: Lint Go
+        run: |
+          cd go-server
+          go fmt ./...
+          go vet ./...
+
+      - name: Lint C++
+        run: |
+          clang-tidy cpp-components/*.cpp --checks=*

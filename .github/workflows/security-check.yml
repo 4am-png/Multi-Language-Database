@@ -1,0 +1,26 @@
+name: Dependency Security Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Python dependencies
+        run: |
+          pip install safety
+          pip install -r python-scripts/requirements.txt
+
+      - name: Run security check
+        run: |
+          safety check

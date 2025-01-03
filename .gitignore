@@ -1,12 +1,52 @@
+# CMake-generated files
 CMakeLists.txt.user
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
+CMakeFiles/
+CMakeScripts/
+CTestTestfile.cmake
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
-CTestTestfile.cmake
-_deps
+_deps/
 CMakeUserPresets.json
+
+# Make-generated files
+Makefile
+*.o
+*.out
+
+# Testing files
+Testing/
+
+# Python-related files
+*.pyc
+*.pyo
+__pycache__/
+.python-version
+
+# Virtual environment
+venv/
+.env/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+*.bak
+
+# Go-related files
+bin/
+pkg/
+*.exe
+*.test
+
+# General IDE/Editor-specific files
+.idea/
+.vscode/
+*.iml
+
+# OS-specific files
+Thumbs.db
+.DS_Store

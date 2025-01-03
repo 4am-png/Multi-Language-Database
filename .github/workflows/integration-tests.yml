@@ -1,0 +1,32 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Go and Python dependencies
+        run: |
+          sudo apt-get install -y build-essential
+          pip install -r python-scripts/requirements.txt
+
+      - name: Start Go server
+        run: |
+          cd go-server
+          go build -o server main.go
+          ./server &
+
+      - name: Run integration tests
+        run: |
+          pytest python-scripts/tests/integration/

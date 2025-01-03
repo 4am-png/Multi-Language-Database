@@ -1,3 +1,9 @@
-python -m venv venv
-source venv/bin/activate    # Для Linux/Mac
-venv\Scripts\activate       # Для Windows
+psycopg2==2.9.7      # Для взаємодії з PostgreSQL
+pandas==2.1.1        # Для аналізу та обробки даних
+numpy==1.26.0        # Для числових обчислень
+sqlalchemy==2.1.2    # Для ORM та зручної роботи з SQL
+requests==2.31.0     # Для HTTP-запитів (у разі використання API)
+pytest==7.4.2        # Для тестування Python-скриптів
+matplotlib==3.8.1    # Для візуалізації даних
+seaborn==0.13.0      # Для створення розширених графіків
+jupyterlab==4.0.5    # Для інтерактивного виконання скриптів (опціонально)

@@ -1,0 +1,23 @@
+name: Database Migration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PostgreSQL
+        uses: harmon758/postgresql-action@v2
+        with:
+          postgresql version: '14'
+
+      - name: Apply migrations
+        run: |
+          psql -U postgres -f schema.sql
